@@ -77,12 +77,12 @@ class Config:
     API_KEY = "AIzaSyD0w8gLzFQP3YPRknu3V52nOFqDN6DQEEs"
     API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
     VIP_LINK = "https://exemplo.com/vip"
-    CHECKOUT_START = "https://checkout.exemplo.com/start"
-    CHECKOUT_PREMIUM = "https://checkout.exemplo.com/premium"
-    CHECKOUT_EXTREME = "https://checkout.exemplo.com/extreme"
-    CHECKOUT_VIP_1MES = "https://checkout.exemplo.com/vip-1mes"
-    CHECKOUT_VIP_3MESES = "https://checkout.exemplo.com/vip-3meses"
-    CHECKOUT_VIP_1ANO = "https://checkout.exemplo.com/vip-1ano"
+    CHECKOUT_START = "https://pay.risepay.com.br/Pay/470fe9f8a5094e4888dd8aa6b453b294"
+    CHECKOUT_PREMIUM = "https://pay.risepay.com.br/Pay/63eeb3ec51224bfcbff3883518e616e5"
+    CHECKOUT_EXTREME = "https://pay.risepay.com.br/Pay/00b73dd843f24fe291464ce52f41156a"
+    CHECKOUT_VIP_1MES = "https://pay.risepay.com.br/Pay/90dc356a5cb845158549a366ff049848"
+    CHECKOUT_VIP_3MESES = "https://pay.risepay.com.br/Pay/ed69ba2185534b76b78cf3c0367318e8"
+    CHECKOUT_VIP_1ANO = "https://pay.risepay.com.br/Pay/b23258b50b8c4d529e3c31a92cdcffc7"
     MAX_REQUESTS_PER_SESSION = 30
     REQUEST_TIMEOUT = 30
     AUDIO_FILE = "https://github.com/hertima/Plataforma-/raw/refs/heads/main/assets_audio_paloma_audio.mp3"
@@ -1681,4 +1681,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
