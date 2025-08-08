@@ -1,4 +1,22 @@
+# ======================
+# IMPORTAÇÕES
+# ======================
+import streamlit as st
+import requests
+import json
+import time
+import random
+import sqlite3
+import re
+import os
+import uuid
+from datetime import datetime
+from pathlib import Path
+from functools import lru_cache
 
+# ======================
+# CONFIGURAÇÃO INICIAL DO STREAMLIT
+# ======================
 st.set_page_config(
     page_title="Paloma Premium",
     page_icon="💋",
