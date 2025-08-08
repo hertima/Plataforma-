@@ -24,11 +24,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st._config.set_option('client.caching', True)
-st._config.set_option('client.showErrorDetails', False)
-
 # ======================
-# META PIXEL (FACEBOOK) - ATUALIZAÇÃO!
+# META PIXEL (FACEBOOK)
 # ======================
 st.components.v1.html("""
 <!-- Meta Pixel Code -->
@@ -50,54 +47,41 @@ src="https://www.facebook.com/tr?id=1286654799832705&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 """, height=0)
 
-hide_streamlit_style = """
-<style>
-    #root > div:nth-child(1) > div > div > div > div > section > div {
-        padding-top: 0rem;
-    }
-    div[data-testid="stToolbar"] {
-        display: none !important;
-    }
-    div[data-testid="stDecoration"] {
-        display: none !important;
-    }
-    div[data-testid="stStatusWidget"] {
-        display: none !important;
-    }
-    #MainMenu {
-        display: none !important;
-    }
-    header {
-        display: none !important;
-    }
-    footer {
-        display: none !important;
-    }
-    .stDeployButton {
-        display: none !important;
-    }
-    .block-container {
-        padding-top: 0rem !important;
-    }
-    [data-testid="stVerticalBlock"] {
-        gap: 0.5rem !important;
-    }
-    [data-testid="stHorizontalBlock"] {
-        gap: 0.5rem !important;
-    }
-    .stApp {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-</style>
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-# [...] (TODO O RESTO DO SEU CÓDIGO ORIGINAL PRESERVADO)
-# Todas as classes, métodos e configurações mantidas exatamente como estão
+# ======================
+# CONSTANTES E CONFIGURAÇÕES
+# ======================
+class Config:
+    API_KEY = "AIzaSyD0w8gLzFQP3YPRknu3V52nOFqDN6DQEEs"
+    API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
+    # ... (restante das configurações)
 
 # ======================
-# APLICAÇÃO PRINCIPAL (COM PIXEL INTEGRADO)
+# SERVIÇOS DE BANCO DE DADOS (MOVIDO PARA ANTES DA FUNÇÃO MAIN)
+# ======================
+class DatabaseService:
+    @staticmethod
+    def init_db():
+        conn = sqlite3.connect('chat_history.db', check_same_thread=False)
+        c = conn.cursor()
+        c.execute('''CREATE TABLE IF NOT EXISTS conversations
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     user_id TEXT,
+                     session_id TEXT,
+                     timestamp DATETIME,
+                     role TEXT,
+                     content TEXT)''')
+        conn.commit()
+        return conn
+
+    # ... (outros métodos da DatabaseService)
+
+# ======================
+# OUTRAS CLASSES (Persona, CTAEngine, UiService, etc.)
+# ======================
+# ... (todo o restante do seu código original)
+
+# ======================
+# APLICAÇÃO PRINCIPAL
 # ======================
 def main():
     if 'db_conn' not in st.session_state:
@@ -105,30 +89,7 @@ def main():
     
     conn = st.session_state.db_conn
     
-    ChatService.initialize_session(conn)
-    
-    if not st.session_state.age_verified:
-        UiService.age_verification()
-        st.stop()
-    
-    UiService.setup_sidebar()
-    
-    if not st.session_state.connection_complete:
-        UiService.show_call_effect()
-        st.session_state.connection_complete = True
-        save_persistent_data()
-        st.rerun()
-    
-    # [...] (TODAS AS PÁGINAS E FUNCIONALIDADES ORIGINAIS)
-
-    # EXEMPLO DE RASTREAMENTO DE EVENTO (adicione isso aos botões VIP)
-    if st.button("Tornar-se VIP"):
-        st.components.v1.html("""
-        <script>
-        fbq('track', 'Lead', {content_name: 'Botão VIP Clicado'});
-        </script>
-        """, height=0)
-        # Resto da lógica do botão...
+    # ... (resto da lógica da função main)
 
 if __name__ == "__main__":
     main()
